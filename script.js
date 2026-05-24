@@ -166,8 +166,13 @@ function showScene(name) {
   function onGiftClick() {
 
     if (clicked) return;
-
     clicked = true;
+
+    // 🎶 música
+    const musica = document.getElementById("musica");
+    if (musica) {
+      musica.play().catch(() => {});
+    }
 
     // animação do presente
     wrap.classList.add('gift-click');
@@ -179,26 +184,20 @@ function showScene(name) {
 
     // muda texto
     setTimeout(() => {
-
       hint.textContent = 'Descubra o que tem dentro…';
       hint.style.animation = 'none';
-
     }, 500);
 
     // próxima cena
     setTimeout(() => {
       goToLetter();
     }, 1700);
-
   }
 
-  wrap.addEventListener('click', onGiftClick);
-
-  wrap.addEventListener(
-    'touchstart',
-    onGiftClick,
-    { passive: true }
-  );
+  if (wrap) {
+    wrap.addEventListener('click', onGiftClick);
+    wrap.addEventListener('touchstart', onGiftClick, { passive: true });
+  }
 
 })();
 
